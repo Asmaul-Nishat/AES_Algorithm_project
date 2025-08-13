@@ -1,62 +1,77 @@
-## 📌 Problem Statement
+# 🔐 AES Algorithm – Python Encryption Project
 
-**The Blog Publishing and Management System (BPMS)** is designed to provide an **easy-to-use** and **efficient platform** for bloggers, readers, and administrators.  
-It enables **content creation**, **management**, and **interaction** through a user-friendly interface while maintaining **secure data handling**.
+## 📌 Overview
+The **Advanced Encryption Standard (AES)** is a **symmetric encryption algorithm** standardized by **NIST in 2001**.  
+It is widely used to protect sensitive data due to its **high security** and **efficiency**.
 
-## 🎯 Objectives
+- Works on fixed-size blocks of **128 bits**  
+- Supports key sizes of **128**, **192**, or **256 bits**  
 
-- **Simplify blog creation** for non-technical users  
-- Ensure **organized content management** with categories and tags  
-- Provide **engagement features** like comments, likes, and sharing  
-- Enable **administrators** to monitor content quality and user activity  
-- Maintain **data security** and **system reliability**
+This project demonstrates **encryption** and **decryption** concepts **inspired by AES**, implemented in **Python**.  
+It also includes a **scoring system** to evaluate the strength of encryption based on **statistical** and **cryptographic metrics**.
 
-## 🏗️ System Scope
-
-The BPMS includes the following core modules:
-
-- **User Management** – Registration, login, and profile updates  
-- **Post Management** – Create, edit, delete, and search blog posts  
-- **Category Management** – Classify and filter blog content  
-- **Comment System** – Reader and blogger interactions  
-- **Admin Panel** – Manage posts, users, and system settings  
-- **Analytics Dashboard** – Track post performance and user engagement  
-
-## 🔍 Key Features
-
-- **Responsive UI** (HTML, CSS, JavaScript)  
-- **Backend** using PHP and MySQL  
-- **Secure Authentication** with role-based access  
-- **Search & Filter** functionality for better content discovery  
-- **Like & Share** options to boost audience reach  
+> ⚠️ **Note:** This is a **custom encryption demonstration** and **not a direct AES implementation**.  
+> For production, use libraries like **PyCryptodome**.
 
 ---
 
-## 💻 Sample Code Snippet
+## ⚙️ How AES Works (Simplified)
 
-```php
-<?php
-// Database connection
-$conn = new mysqli("localhost", "root", "", "bpms");
+1. **Key Expansion** – The main key is expanded into round keys.  
+2. **Initial Round** – The plaintext is XORed with the initial key.  
+3. **Rounds** (10 / 12 / 14 depending on key size):  
+   - **SubBytes** – Byte substitution using an S-box  
+   - **ShiftRows** – Shifting rows to increase diffusion  
+   - **MixColumns** – Mixing data within columns  
+   - **AddRoundKey** – XOR with the round key  
+4. **Final Round** – Same as above, without **MixColumns**.
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+---
 
-// Insert a new post
-$title = "My First Blog Post";
-$content = "Welcome to my blog!";
-$sql = "INSERT INTO posts (title, content) VALUES ('$title', '$content')";
+## 🛠 Features
 
-if ($conn->query($sql) === TRUE) {
-    echo "New post created successfully!";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+- **Custom Encryption Algorithm** (AES-inspired)  
+- **Decryption Support**  
+- **Encryption Strength Scoring** based on:
+  - Unique character diversity  
+  - Sequence variation  
+  - Entropy (randomness)  
+  - Frequency analysis resistance  
+  - Avalanche effect (change propagation)  
+  - Reversibility check  
+  - Pattern removal efficiency  
+  - Execution time efficiency  
+- **PrettyTable Output** for results display
 
-$conn->close();
-?>
+---
+
+## 📂 Project Structure
+
+### 1️⃣ Cipher Class – Handles Encryption & Decryption
+- `__init__(original_string)` – Stores the string  
+- `encrypt()` – Reverses string, applies ASCII shifts, inserts random characters  
+- `decrypt()` – Removes inserted characters, reverses ASCII shifts, restores original  
+
+### 2️⃣ Scoring Class – Evaluates Encryption Strength
+- Calculates entropy, frequency variation, encryption consistency  
+- `calculate_score()` – Aggregates weighted scores  
+- `generate_summary()` – Returns metric breakdown  
+- `print_results()` – Displays results in a table  
+
+---
+
+## ▶️ Running the Project
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/yourrepo.git
+
+# Navigate into the project directory
+cd yourrepo
+
+# Run the script
+python aes_project.py
+
 
 # Clone the repository
 git clone https://github.com/yourusername/yourrepo.git
